@@ -1,4 +1,5 @@
 import 'package:enpal_tech_chall/domain/repositories/monitoring.repository.dart';
+import 'package:enpal_tech_chall/domain/services/monitoring.service.dart';
 import 'package:enpal_tech_chall/domain/use_cases/monitoring/get_monitoring.use_case.dart';
 import 'package:injectable/injectable.dart';
 
@@ -9,4 +10,9 @@ abstract class DomainModule {
   GetMonitoringUseCase getMonitoringUseCase(
     MonitoringRepository monitoringRepository,
   ) => GetMonitoringUseCase(monitoringRepository: monitoringRepository);
+
+  @singleton
+  MonitoringService monitoringService(
+    GetMonitoringUseCase getMonitoringUseCase,
+  ) => MonitoringService(getMonitoringUseCase: getMonitoringUseCase);
 }

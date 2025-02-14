@@ -7,7 +7,9 @@ part of 'battery.view_state.dart';
 // **************************************************************************
 
 abstract class _$BatteryStateCWProxy {
-  BatteryState loading(bool loading);
+  BatteryState monitoring(List<MonitoringEntity> monitoring);
+
+  BatteryState date(DateTime date);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BatteryState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -15,7 +17,7 @@ abstract class _$BatteryStateCWProxy {
   /// ```dart
   /// BatteryState(...).copyWith(id: 12, name: "My name")
   /// ````
-  BatteryState call({bool loading});
+  BatteryState call({List<MonitoringEntity> monitoring, DateTime date});
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfBatteryState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfBatteryState.copyWith.fieldName(...)`
@@ -25,7 +27,11 @@ class _$BatteryStateCWProxyImpl implements _$BatteryStateCWProxy {
   final BatteryState _value;
 
   @override
-  BatteryState loading(bool loading) => this(loading: loading);
+  BatteryState monitoring(List<MonitoringEntity> monitoring) =>
+      this(monitoring: monitoring);
+
+  @override
+  BatteryState date(DateTime date) => this(date: date);
 
   @override
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BatteryState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -34,13 +40,21 @@ class _$BatteryStateCWProxyImpl implements _$BatteryStateCWProxy {
   /// ```dart
   /// BatteryState(...).copyWith(id: 12, name: "My name")
   /// ````
-  BatteryState call({Object? loading = const $CopyWithPlaceholder()}) {
+  BatteryState call({
+    Object? monitoring = const $CopyWithPlaceholder(),
+    Object? date = const $CopyWithPlaceholder(),
+  }) {
     return BatteryState(
-      loading:
-          loading == const $CopyWithPlaceholder()
-              ? _value.loading
+      monitoring:
+          monitoring == const $CopyWithPlaceholder()
+              ? _value.monitoring
               // ignore: cast_nullable_to_non_nullable
-              : loading as bool,
+              : monitoring as List<MonitoringEntity>,
+      date:
+          date == const $CopyWithPlaceholder()
+              ? _value.date
+              // ignore: cast_nullable_to_non_nullable
+              : date as DateTime,
     );
   }
 }

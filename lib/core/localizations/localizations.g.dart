@@ -18,7 +18,11 @@ class CodegenLoader extends AssetLoader{
   "solar": "Solar",
   "house": "House",
   "battery": "Battery",
-  "watts": "{watts}W"
+  "watts": "{watts}W",
+  "solar_generation": "Solar generation",
+  "house_consumption": "House consumption",
+  "battery_charge": "Battery consumption",
+  "no_data": "No data for this date"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en};
 }

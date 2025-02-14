@@ -7,7 +7,9 @@ part of 'house.view_state.dart';
 // **************************************************************************
 
 abstract class _$HouseStateCWProxy {
-  HouseState loading(bool loading);
+  HouseState monitoring(List<MonitoringEntity> monitoring);
+
+  HouseState date(DateTime date);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HouseState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -15,7 +17,7 @@ abstract class _$HouseStateCWProxy {
   /// ```dart
   /// HouseState(...).copyWith(id: 12, name: "My name")
   /// ````
-  HouseState call({bool loading});
+  HouseState call({List<MonitoringEntity> monitoring, DateTime date});
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfHouseState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfHouseState.copyWith.fieldName(...)`
@@ -25,7 +27,11 @@ class _$HouseStateCWProxyImpl implements _$HouseStateCWProxy {
   final HouseState _value;
 
   @override
-  HouseState loading(bool loading) => this(loading: loading);
+  HouseState monitoring(List<MonitoringEntity> monitoring) =>
+      this(monitoring: monitoring);
+
+  @override
+  HouseState date(DateTime date) => this(date: date);
 
   @override
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `HouseState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
@@ -34,13 +40,21 @@ class _$HouseStateCWProxyImpl implements _$HouseStateCWProxy {
   /// ```dart
   /// HouseState(...).copyWith(id: 12, name: "My name")
   /// ````
-  HouseState call({Object? loading = const $CopyWithPlaceholder()}) {
+  HouseState call({
+    Object? monitoring = const $CopyWithPlaceholder(),
+    Object? date = const $CopyWithPlaceholder(),
+  }) {
     return HouseState(
-      loading:
-          loading == const $CopyWithPlaceholder()
-              ? _value.loading
+      monitoring:
+          monitoring == const $CopyWithPlaceholder()
+              ? _value.monitoring
               // ignore: cast_nullable_to_non_nullable
-              : loading as bool,
+              : monitoring as List<MonitoringEntity>,
+      date:
+          date == const $CopyWithPlaceholder()
+              ? _value.date
+              // ignore: cast_nullable_to_non_nullable
+              : date as DateTime,
     );
   }
 }

@@ -38,6 +38,7 @@ dependencies:
   # state management
   flutter_riverpod: 2.6.1
   riverpod_annotation: 2.6.1
+  rxdart: 0.28.0
 
   # network
   dio: 5.8.0+1

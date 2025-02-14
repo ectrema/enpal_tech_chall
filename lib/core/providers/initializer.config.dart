@@ -23,6 +23,8 @@ import 'package:enpal_tech_chall/data/networking/endpoints/monitoring.endpoint.d
     as _i793;
 import 'package:enpal_tech_chall/domain/repositories/monitoring.repository.dart'
     as _i506;
+import 'package:enpal_tech_chall/domain/services/monitoring.service.dart'
+    as _i202;
 import 'package:enpal_tech_chall/domain/use_cases/monitoring/get_monitoring.use_case.dart'
     as _i825;
 import 'package:get_it/get_it.dart' as _i174;
@@ -55,6 +57,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i825.GetMonitoringUseCase>(
       () => domainModule.getMonitoringUseCase(gh<_i506.MonitoringRepository>()),
+    );
+    gh.singleton<_i202.MonitoringService>(
+      () => domainModule.monitoringService(gh<_i825.GetMonitoringUseCase>()),
     );
     return this;
   }

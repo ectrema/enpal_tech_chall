@@ -7,8 +7,6 @@ part of 'solar.view_state.dart';
 // **************************************************************************
 
 abstract class _$SolarStateCWProxy {
-  SolarState loading(bool loading);
-
   SolarState monitoring(List<MonitoringEntity> monitoring);
 
   SolarState date(DateTime date);
@@ -19,11 +17,7 @@ abstract class _$SolarStateCWProxy {
   /// ```dart
   /// SolarState(...).copyWith(id: 12, name: "My name")
   /// ````
-  SolarState call({
-    bool loading,
-    List<MonitoringEntity> monitoring,
-    DateTime date,
-  });
+  SolarState call({List<MonitoringEntity> monitoring, DateTime date});
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfSolarState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfSolarState.copyWith.fieldName(...)`
@@ -31,9 +25,6 @@ class _$SolarStateCWProxyImpl implements _$SolarStateCWProxy {
   const _$SolarStateCWProxyImpl(this._value);
 
   final SolarState _value;
-
-  @override
-  SolarState loading(bool loading) => this(loading: loading);
 
   @override
   SolarState monitoring(List<MonitoringEntity> monitoring) =>
@@ -50,16 +41,10 @@ class _$SolarStateCWProxyImpl implements _$SolarStateCWProxy {
   /// SolarState(...).copyWith(id: 12, name: "My name")
   /// ````
   SolarState call({
-    Object? loading = const $CopyWithPlaceholder(),
     Object? monitoring = const $CopyWithPlaceholder(),
     Object? date = const $CopyWithPlaceholder(),
   }) {
     return SolarState(
-      loading:
-          loading == const $CopyWithPlaceholder()
-              ? _value.loading
-              // ignore: cast_nullable_to_non_nullable
-              : loading as bool,
       monitoring:
           monitoring == const $CopyWithPlaceholder()
               ? _value.monitoring

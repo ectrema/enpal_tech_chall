@@ -1,3 +1,4 @@
+import 'package:enpal_tech_chall/core/localizations/localizations.dart';
 import 'package:enpal_tech_chall/core/utils/utils.dart';
 import 'package:enpal_tech_chall/ui/screens/main/solar/solar.view_model.dart';
 import 'package:enpal_tech_chall/ui/screens/main/solar/solar.view_state.dart';
@@ -23,33 +24,21 @@ class _SolarScreenState extends ConsumerState<SolarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bool loading = ref.watch(
-      solarViewModelProvider.select((SolarState value) => value.loading),
-    );
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Solar generation', style: textTheme.headlineMedium),
+        title: Text(
+          LocaleKeys.solar_generation.tr(),
+          style: textTheme.headlineMedium,
+        ),
       ),
       body: SafeArea(
-        child:
-            loading
-                ? const Center(child: CircularProgressIndicator())
-                : const _Body(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[const _Header(), const _Graph()],
+        ),
       ),
-    );
-  }
-}
-
-class _Body extends ConsumerWidget {
-  const _Body();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[const _Header(), const _Graph()],
     );
   }
 }
@@ -80,7 +69,7 @@ class _Header extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(Utils.formatDate(date)),
-            const SizedBox(width: 4),
+            const SizedBox(width: 8),
             const Icon(Icons.calendar_today, size: 16),
           ],
         ),
@@ -95,8 +84,14 @@ class _Graph extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final Map<DateTime, double> data = ref.watch(
-      solarViewModelProvider.select((SolarState value) => value.hourlySum),
+      solarViewModelProvider.select(
+        (SolarState value) => value.monitoring.hourlySum,
+      ),
     );
+
+    if (data.isEmpty) {
+      return Center(child: Text(LocaleKeys.no_data.tr()));
+    }
 
     return AspectRatio(
       aspectRatio: 1.3,

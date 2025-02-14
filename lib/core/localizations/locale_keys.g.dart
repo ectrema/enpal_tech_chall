@@ -7,5 +7,9 @@ abstract class  LocaleKeys {
   static const house = 'house';
   static const battery = 'battery';
   static const watts = 'watts';
+  static const solar_generation = 'solar_generation';
+  static const house_consumption = 'house_consumption';
+  static const battery_charge = 'battery_charge';
+  static const no_data = 'no_data';
 
 }

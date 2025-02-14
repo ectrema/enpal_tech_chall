@@ -25,6 +25,7 @@ class MainScreen extends ConsumerWidget {
           padding: const EdgeInsets.only(bottom: 24, left: 24, right: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            spacing: 8,
             children: List<Widget>.generate(3, (int index) {
               final (String, IconData) info = viewModel.navBarInfo(index);
 
