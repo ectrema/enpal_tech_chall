@@ -1,11 +1,16 @@
 import 'package:enpal_tech_chall/core/localizations/localizations.dart';
+import 'package:enpal_tech_chall/core/providers/initializer.dart';
 import 'package:enpal_tech_chall/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
+import 'package:get_it/get_it.dart';
 
 void main() async {
   // Initialize widgets
   WidgetsFlutterBinding.ensureInitialized();
+
+  final GetIt getIt = initializeInjections();
+  await getIt.allReady();
   // Initialize translations
   await EasyLocalization.ensureInitialized();
   runApp(

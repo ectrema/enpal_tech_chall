@@ -74,9 +74,6 @@ linter:
     # Use the cascading style when successively invoking methods on the same reference
     cascade_invocations: true
 
-    # auto indent code
-    require_trailing_commas: true
-
     # do await functions that return a Future
     unawaited_futures: true
 

@@ -1,3 +1,7 @@
+import 'package:enpal_tech_chall/core/enums/energy_type.enum.dart';
+import 'package:enpal_tech_chall/core/providers/initializer.dart';
+import 'package:enpal_tech_chall/domain/entities/monitoring.entity.dart';
+import 'package:enpal_tech_chall/domain/use_cases/monitoring/get_monitoring.use_case.dart';
 import 'package:enpal_tech_chall/ui/screens/main/solar/solar.view_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -8,12 +12,26 @@ part 'solar.view_model.g.dart';
 ///
 @riverpod
 class SolarViewModel extends _$SolarViewModel {
+  final GetMonitoringUseCase _getMonitoringUseCase;
+
   factory SolarViewModel() {
-    return SolarViewModel._();
+    return SolarViewModel._(
+      getMonitoringUseCase: injector<GetMonitoringUseCase>(),
+    );
   }
 
-  SolarViewModel._();
+  SolarViewModel._({required GetMonitoringUseCase getMonitoringUseCase})
+    : _getMonitoringUseCase = getMonitoringUseCase;
 
   @override
   SolarState build() => SolarState.initial();
+
+  Future<void> getMonitoring() async {
+    final List<MonitoringEntity> result = await _getMonitoringUseCase.execute((
+      DateTime.now(),
+      EnergyType.solar,
+    ));
+
+    state = state.copyWith(monitoring: result);
+  }
 }

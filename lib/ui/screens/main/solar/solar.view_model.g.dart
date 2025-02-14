@@ -6,7 +6,7 @@ part of 'solar.view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$solarViewModelHash() => r'e9c9cfb7150c8fead8d1c3170fb242675028ae22';
+String _$solarViewModelHash() => r'af4507857e64fed573bd54bc6e97b2523695837b';
 
 ///
 /// [SolarViewModel]
