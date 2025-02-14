@@ -16,6 +16,7 @@ import 'package:enpal_tech_chall/core/providers/injections/data.module.dart'
     as _i917;
 import 'package:enpal_tech_chall/core/providers/injections/domain.module.dart'
     as _i511;
+import 'package:enpal_tech_chall/core/theming/theme.dart' as _i894;
 import 'package:enpal_tech_chall/data/monitoring/remote/monitoring.remote.data_source.dart'
     as _i640;
 import 'package:enpal_tech_chall/data/networking/endpoints/monitoring.endpoint.dart'
@@ -38,6 +39,7 @@ extension GetItInjectableX on _i174.GetIt {
     final dataModule = _$DataModule();
     final domainModule = _$DomainModule();
     gh.factory<String>(() => coreModule.apiUrl());
+    gh.singleton<_i894.AppTheme>(() => coreModule.appTheme());
     gh.singleton<_i127.DioClient>(() => coreModule.dioClient(gh<String>()));
     gh.singleton<_i793.MonitoringEndpoint>(
       () => dataModule.monitoringEndpoint(gh<_i127.DioClient>()),

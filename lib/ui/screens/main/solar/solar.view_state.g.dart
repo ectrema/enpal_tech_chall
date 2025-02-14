@@ -11,13 +11,19 @@ abstract class _$SolarStateCWProxy {
 
   SolarState monitoring(List<MonitoringEntity> monitoring);
 
+  SolarState date(DateTime date);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SolarState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
   /// SolarState(...).copyWith(id: 12, name: "My name")
   /// ````
-  SolarState call({bool loading, List<MonitoringEntity> monitoring});
+  SolarState call({
+    bool loading,
+    List<MonitoringEntity> monitoring,
+    DateTime date,
+  });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfSolarState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfSolarState.copyWith.fieldName(...)`
@@ -34,6 +40,9 @@ class _$SolarStateCWProxyImpl implements _$SolarStateCWProxy {
       this(monitoring: monitoring);
 
   @override
+  SolarState date(DateTime date) => this(date: date);
+
+  @override
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `SolarState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -43,6 +52,7 @@ class _$SolarStateCWProxyImpl implements _$SolarStateCWProxy {
   SolarState call({
     Object? loading = const $CopyWithPlaceholder(),
     Object? monitoring = const $CopyWithPlaceholder(),
+    Object? date = const $CopyWithPlaceholder(),
   }) {
     return SolarState(
       loading:
@@ -55,6 +65,11 @@ class _$SolarStateCWProxyImpl implements _$SolarStateCWProxy {
               ? _value.monitoring
               // ignore: cast_nullable_to_non_nullable
               : monitoring as List<MonitoringEntity>,
+      date:
+          date == const $CopyWithPlaceholder()
+              ? _value.date
+              // ignore: cast_nullable_to_non_nullable
+              : date as DateTime,
     );
   }
 }

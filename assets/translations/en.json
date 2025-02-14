@@ -1,5 +1,6 @@
 {
   "solar": "Solar",
   "house": "House",
-  "battery": "Battery"
+  "battery": "Battery",
+  "watts": "{watts}W"
 }

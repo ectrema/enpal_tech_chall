@@ -27,11 +27,19 @@ class SolarViewModel extends _$SolarViewModel {
   SolarState build() => SolarState.initial();
 
   Future<void> getMonitoring() async {
-    final List<MonitoringEntity> result = await _getMonitoringUseCase.execute((
-      DateTime.now(),
-      EnergyType.solar,
-    ));
+    try {
+      final List<MonitoringEntity> result = await _getMonitoringUseCase.execute(
+        (state.date, EnergyType.solar),
+      );
 
-    state = state.copyWith(monitoring: result);
+      state = state.copyWith(monitoring: result, loading: false);
+    } catch (e) {
+      state = state.copyWith(loading: false);
+    }
+  }
+
+  void setDate(DateTime date) {
+    state = state.copyWith(date: date);
+    getMonitoring();
   }
 }

@@ -6,5 +6,6 @@ abstract class  LocaleKeys {
   static const solar = 'solar';
   static const house = 'house';
   static const battery = 'battery';
+  static const watts = 'watts';
 
 }

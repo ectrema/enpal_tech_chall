@@ -55,9 +55,13 @@ dependencies:
   equatable: 2.0.7
   copy_with_extension: 6.0.1
   collection: 1.19.1
+  flex_color_scheme: 8.1.0
 
   # internationalization
   easy_localization: 3.0.7+1
+
+  # chart
+  fl_chart: 0.70.2
 
 dev_dependencies:
   flutter_test:

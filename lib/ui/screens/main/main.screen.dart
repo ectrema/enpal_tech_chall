@@ -15,6 +15,8 @@ class MainScreen extends ConsumerWidget {
     final int currentIndex = ref.watch(
       mainViewModelProvider.select((MainState s) => s.index),
     );
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
       body: navigationShell,
@@ -34,7 +36,10 @@ class MainScreen extends ConsumerWidget {
                     duration: Duration(milliseconds: 200),
                     decoration: ShapeDecoration(
                       shape: StadiumBorder(),
-                      color: currentIndex == index ? Colors.white : null,
+                      color:
+                          currentIndex == index
+                              ? colorScheme.primary
+                              : colorScheme.surface,
                     ),
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 8),
@@ -44,9 +49,23 @@ class MainScreen extends ConsumerWidget {
                           Align(
                             alignment: Alignment.topCenter,
                             heightFactor: 1.0,
-                            child: Icon(info.$2),
+                            child: Icon(
+                              info.$2,
+                              color:
+                                  currentIndex == index
+                                      ? colorScheme.onPrimary
+                                      : null,
+                            ),
                           ),
-                          Text(info.$1),
+                          Text(
+                            info.$1,
+                            style: textTheme.labelMedium?.copyWith(
+                              color:
+                                  currentIndex == index
+                                      ? colorScheme.onPrimary
+                                      : colorScheme.onSurface,
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -1,6 +1,7 @@
 import 'package:enpal_tech_chall/core/localizations/localizations.dart';
 import 'package:enpal_tech_chall/core/providers/initializer.dart';
 import 'package:enpal_tech_chall/core/routing/app_router.dart';
+import 'package:enpal_tech_chall/core/theming/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope;
 import 'package:get_it/get_it.dart';
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final AppTheme appTheme = injector<AppTheme>();
+
     return ProviderScope(
       child: MaterialApp.router(
         routerConfig: router,
@@ -38,6 +41,8 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
+        theme: appTheme.lightTheme,
+        darkTheme: appTheme.darkTheme,
       ),
     );
   }
