@@ -26,3 +26,82 @@ linter:
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+
+# Use parameter order as in json response
+    always_put_required_named_parameters_first: false
+
+    # Util classes are awesome!
+    avoid_classes_with_only_static_members: false
+
+    # ------ Enable individual rules ------ #
+    #                 ---                   #
+    # These rules here are good but too     #
+    # opinionated to enable them by default #
+    # ------------------------------------- #
+
+    # Make constructors the first thing in every class
+    sort_constructors_first: false
+
+    # The new tabs vs. spaces. Choose wisely
+    prefer_single_quotes: true
+
+    # Blindly follow the Flutter code style, which prefers types everywhere
+    always_specify_types: true
+
+    # Back to the 80s
+    lines_longer_than_80_chars: false
+
+    # allow trycatch withtout catch clause
+    avoid_catches_without_on_clauses: false
+
+    library_prefixes: false
+    parameter_assignments: false
+    sort_pub_dependencies: false
+
+    # avoid memory leak
+    cancel_subscriptions: true
+    close_sinks: true
+
+    # declare method return types
+    always_declare_return_types: true
+
+    # don't pass an argument that matches the corresponding parameter's default value
+    avoid_redundant_argument_values: true
+
+    # mark async functions as returning Future
+    avoid_void_async: true
+
+    # Use the cascading style when successively invoking methods on the same reference
+    cascade_invocations: true
+
+    # auto indent code
+    require_trailing_commas: true
+
+    # do await functions that return a Future
+    unawaited_futures: true
+
+    # avoid returning an awaited expression when the expression type is assignable to the function's return type
+    unnecessary_await_in_return: true
+
+    # don't create a lambda when a tear-off will do
+    unnecessary_lambdas: true
+
+    # avoid using parentheses when not needed
+    unnecessary_parenthesis: true
+
+    # do use ColoredBox when Container has only a Color
+    use_colored_box: true
+
+    # do use DecoratedBox when Container has only a Decoration
+    use_decorated_box: true
+
+    # use already defined const values
+    use_named_constants: true
+
+analyzer:
+  exclude:
+    - "example/**"
+    - "build/**"
+    - "**/*.config.dart"
+    - "**/*.g.dart"
+    - "**/*.gr.dart"
