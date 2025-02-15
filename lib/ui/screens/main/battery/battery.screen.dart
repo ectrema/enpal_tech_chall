@@ -3,6 +3,7 @@ import 'package:enpal_tech_chall/ui/screens/main/battery/battery.view_model.dart
 import 'package:enpal_tech_chall/ui/screens/main/battery/battery.view_state.dart';
 import 'package:enpal_tech_chall/ui/widget/custom_line_chart.dart';
 import 'package:enpal_tech_chall/ui/widget/custom_text_button.dart';
+import 'package:enpal_tech_chall/ui/widget/no_internet_widget.dart';
 import 'package:enpal_tech_chall/ui/widget/show_in_kilow_watt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,6 +30,11 @@ class _BatteryScreenState extends ConsumerState<BatteryScreen> {
     final BatteryViewModel viewModel = ref.read(
       batteryViewModelProvider.notifier,
     );
+    final bool showOfflineWidget = ref.watch(
+      batteryViewModelProvider.select(
+        (BatteryState value) => value.showOfflineWidget,
+      ),
+    );
 
     return Scaffold(
       key: viewModel.scaffoldKey,
@@ -40,17 +46,21 @@ class _BatteryScreenState extends ConsumerState<BatteryScreen> {
       ),
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: ref.read(batteryViewModelProvider.notifier).reloadData,
-          child: CustomScrollView(
-            slivers: <Widget>[
-              SliverList(
-                delegate: SliverChildListDelegate(const <Widget>[
-                  _Header(),
-                  _Graph(),
-                  _Footer(),
-                ]),
-              ),
-            ],
+          onRefresh: viewModel.reloadData,
+          child: NoInternetWidget(
+            showOfflineWidget: showOfflineWidget,
+            onRefresh: viewModel.reloadData,
+            child: CustomScrollView(
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildListDelegate(const <Widget>[
+                    _Header(),
+                    _Graph(),
+                    _Footer(),
+                  ]),
+                ),
+              ],
+            ),
           ),
         ),
       ),

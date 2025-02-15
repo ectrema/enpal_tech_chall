@@ -3,6 +3,7 @@ import 'package:enpal_tech_chall/ui/screens/main/house/house.view_model.dart';
 import 'package:enpal_tech_chall/ui/screens/main/house/house.view_state.dart';
 import 'package:enpal_tech_chall/ui/widget/custom_line_chart.dart';
 import 'package:enpal_tech_chall/ui/widget/custom_text_button.dart';
+import 'package:enpal_tech_chall/ui/widget/no_internet_widget.dart';
 import 'package:enpal_tech_chall/ui/widget/show_in_kilow_watt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,6 +28,11 @@ class _HouseScreenState extends ConsumerState<HouseScreen> {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final HouseViewModel viewModel = ref.read(houseViewModelProvider.notifier);
+    final bool showOfflineWidget = ref.watch(
+      houseViewModelProvider.select(
+        (HouseState value) => value.showOfflineWidget,
+      ),
+    );
 
     return Scaffold(
       key: viewModel.scaffoldKey,
@@ -38,17 +44,21 @@ class _HouseScreenState extends ConsumerState<HouseScreen> {
       ),
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: ref.read(houseViewModelProvider.notifier).reloadData,
-          child: CustomScrollView(
-            slivers: <Widget>[
-              SliverList(
-                delegate: SliverChildListDelegate(const <Widget>[
-                  _Header(),
-                  _Graph(),
-                  _Footer(),
-                ]),
-              ),
-            ],
+          onRefresh: viewModel.reloadData,
+          child: NoInternetWidget(
+            showOfflineWidget: showOfflineWidget,
+            onRefresh: viewModel.reloadData,
+            child: CustomScrollView(
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildListDelegate(const <Widget>[
+                    _Header(),
+                    _Graph(),
+                    _Footer(),
+                  ]),
+                ),
+              ],
+            ),
           ),
         ),
       ),

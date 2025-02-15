@@ -13,6 +13,8 @@ abstract class _$BatteryStateCWProxy {
 
   BatteryState showInKiloWatt(bool showInKiloWatt);
 
+  BatteryState isConnected(bool isConnected);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BatteryState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -23,6 +25,7 @@ abstract class _$BatteryStateCWProxy {
     List<MonitoringEntity> monitoring,
     DateTime date,
     bool showInKiloWatt,
+    bool isConnected,
   });
 }
 
@@ -44,6 +47,9 @@ class _$BatteryStateCWProxyImpl implements _$BatteryStateCWProxy {
       this(showInKiloWatt: showInKiloWatt);
 
   @override
+  BatteryState isConnected(bool isConnected) => this(isConnected: isConnected);
+
+  @override
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BatteryState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -54,6 +60,7 @@ class _$BatteryStateCWProxyImpl implements _$BatteryStateCWProxy {
     Object? monitoring = const $CopyWithPlaceholder(),
     Object? date = const $CopyWithPlaceholder(),
     Object? showInKiloWatt = const $CopyWithPlaceholder(),
+    Object? isConnected = const $CopyWithPlaceholder(),
   }) {
     return BatteryState(
       monitoring:
@@ -71,6 +78,11 @@ class _$BatteryStateCWProxyImpl implements _$BatteryStateCWProxy {
               ? _value.showInKiloWatt
               // ignore: cast_nullable_to_non_nullable
               : showInKiloWatt as bool,
+      isConnected:
+          isConnected == const $CopyWithPlaceholder()
+              ? _value.isConnected
+              // ignore: cast_nullable_to_non_nullable
+              : isConnected as bool,
     );
   }
 }

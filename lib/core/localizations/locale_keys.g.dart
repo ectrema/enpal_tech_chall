@@ -15,5 +15,7 @@ abstract class  LocaleKeys {
   static const show_in_kilo_watt = 'show_in_kilo_watt';
   static const generic_error = 'generic_error';
   static const no_internet_connection = 'no_internet_connection';
+  static const no_internet_connection_title = 'no_internet_connection_title';
+  static const retry = 'retry';
 
 }

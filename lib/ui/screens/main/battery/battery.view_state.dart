@@ -14,17 +14,29 @@ class BatteryState extends ViewStateAbs {
 
   final bool showInKiloWatt;
 
+  final bool isConnected;
+
   const BatteryState({
     required this.monitoring,
     required this.date,
     this.showInKiloWatt = false,
+    this.isConnected = true,
   }) : super();
 
-  BatteryState.initial()
+  BatteryState.initial(this.isConnected)
     : monitoring = const <MonitoringEntity>[],
       date = DateTime.now(),
       showInKiloWatt = false;
 
   @override
-  List<Object?> get props => <Object?>[monitoring, date, showInKiloWatt];
+  List<Object?> get props => <Object?>[
+    monitoring,
+    date,
+    showInKiloWatt,
+    isConnected,
+  ];
+}
+
+extension OnBatteryState on BatteryState {
+  bool get showOfflineWidget => !isConnected && monitoring.isEmpty;
 }

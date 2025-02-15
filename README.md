@@ -18,11 +18,10 @@ samples, guidance on mobile development, and a full API reference.
 
 # TODO
 
-- load data from api
-- show screen with graph
-- pull to refresh
-- theme
-- error handling without internet connection
-- error handling with api
+- load data from api ✅
+- show screen with graph ✅
+- pull to refresh ✅
+- theme ✅
+- error handling without internet connection ✅
 - documentation and write about .env.json
 - Testing 

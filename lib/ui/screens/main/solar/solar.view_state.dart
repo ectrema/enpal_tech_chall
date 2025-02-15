@@ -14,17 +14,29 @@ class SolarState extends ViewStateAbs {
 
   final bool showInKiloWatt;
 
+  final bool isConnected;
+
   const SolarState({
     required this.monitoring,
     required this.date,
     this.showInKiloWatt = false,
+    this.isConnected = true,
   }) : super();
 
-  SolarState.initial()
+  SolarState.initial(this.isConnected)
     : monitoring = const <MonitoringEntity>[],
       date = DateTime.now(),
       showInKiloWatt = false;
 
   @override
-  List<Object?> get props => <Object?>[monitoring, date, showInKiloWatt];
+  List<Object?> get props => <Object?>[
+    monitoring,
+    date,
+    showInKiloWatt,
+    isConnected,
+  ];
+}
+
+extension OnSolarState on SolarState {
+  bool get showOfflineWidget => !isConnected && monitoring.isEmpty;
 }

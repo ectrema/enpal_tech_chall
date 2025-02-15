@@ -14,17 +14,29 @@ class HouseState extends ViewStateAbs {
 
   final bool showInKiloWatt;
 
+  final bool isConnected;
+
   const HouseState({
     required this.monitoring,
     required this.date,
     this.showInKiloWatt = false,
+    this.isConnected = true,
   }) : super();
 
-  HouseState.initial()
+  HouseState.initial(this.isConnected)
     : monitoring = const <MonitoringEntity>[],
       date = DateTime.now(),
       showInKiloWatt = false;
 
   @override
-  List<Object?> get props => <Object?>[monitoring, date, showInKiloWatt];
+  List<Object?> get props => <Object?>[
+    monitoring,
+    date,
+    showInKiloWatt,
+    isConnected,
+  ];
+}
+
+extension OnHouseState on HouseState {
+  bool get showOfflineWidget => !isConnected && monitoring.isEmpty;
 }

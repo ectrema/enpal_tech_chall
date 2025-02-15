@@ -10,6 +10,8 @@ final class ConnectivityService {
     _initStream();
   }
 
+  Stream<bool> get isConnectedStream => _isConnected.stream;
+
   bool get isConnected => _isConnected.value;
 
   static Future<ConnectivityService> inject() async {

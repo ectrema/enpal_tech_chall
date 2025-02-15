@@ -6,7 +6,7 @@ part of 'battery.view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$batteryViewModelHash() => r'e468ad6b9053bc83707ef7313e9fa917308415e3';
+String _$batteryViewModelHash() => r'65a004b48d873f53d2f9b36a9249779942f2ae5c';
 
 ///
 /// [BatteryViewModel]
