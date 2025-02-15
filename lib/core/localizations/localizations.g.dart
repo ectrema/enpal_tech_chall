@@ -35,7 +35,11 @@ class CodegenLoader extends AssetLoader{
   "total": "Total : {watts}W",
   "total_kilo_watt": "Total : {kilo_watt}kWh",
   "average": "Average : {average}W",
-  "average_kilo_watt": "Average : {average_kilo_watt}kWh"
+  "average_kilo_watt": "Average : {average_kilo_watt}kWh",
+  "highest": "Highest : {highest}W",
+  "highest_kilo_watt": "Highest : {highest_kilo_watt}kWh",
+  "lowest": "Lowest : {lowest}W",
+  "lowest_kilo_watt": "Lowest : {lowest_kilo_watt}kWh"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en};
 }

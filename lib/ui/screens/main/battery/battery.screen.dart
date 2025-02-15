@@ -161,12 +161,23 @@ class _SolarInfo extends ConsumerWidget {
         (BatteryState value) => value.averageMonitoring,
       ),
     );
-
+    final int highestMonitoring = ref.watch(
+      batteryViewModelProvider.select(
+        (BatteryState value) => value.highestMonitoring,
+      ),
+    );
+    final int lowestMonitoring = ref.watch(
+      batteryViewModelProvider.select(
+        (BatteryState value) => value.lowestMonitoring,
+      ),
+    );
     return InformationWidget(
       title: LocaleKeys.battery_info.tr(),
       showInKiloWatt: showInKiloWatt,
       totalMonitoring: totalMonitoring,
       averageMonitoring: averageMonitoring,
+      highestMonitoring: highestMonitoring,
+      lowestMonitoring: lowestMonitoring,
     );
   }
 }

@@ -50,4 +50,20 @@ extension OnHouseState on HouseState {
     }
     return totalMonitoring / 24;
   }
+
+  int get highestMonitoring {
+    if (monitoring.isEmpty) return 0;
+
+    return monitoring.hourlySum.values
+        .reduce((double a, double b) => a > b ? a : b)
+        .toInt();
+  }
+
+  int get lowestMonitoring {
+    if (monitoring.isEmpty) return 0;
+
+    return monitoring.hourlySum.values
+        .reduce((double a, double b) => a < b ? a : b)
+        .toInt();
+  }
 }

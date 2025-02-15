@@ -150,11 +150,25 @@ class _SolarInfo extends ConsumerWidget {
       ),
     );
 
+    final int highestMonitoring = ref.watch(
+      solarViewModelProvider.select(
+        (SolarState value) => value.highestMonitoring,
+      ),
+    );
+
+    final int lowestMonitoring = ref.watch(
+      solarViewModelProvider.select(
+        (SolarState value) => value.lowestMonitoring,
+      ),
+    );
+
     return InformationWidget(
       title: LocaleKeys.solar_info.tr(),
       showInKiloWatt: showInKiloWatt,
       totalMonitoring: totalMonitoring,
       averageMonitoring: averageMonitoring,
+      highestMonitoring: highestMonitoring,
+      lowestMonitoring: lowestMonitoring,
     );
   }
 }

@@ -8,12 +8,16 @@ class InformationWidget extends StatelessWidget {
     required this.showInKiloWatt,
     required this.totalMonitoring,
     required this.averageMonitoring,
+    required this.highestMonitoring,
+    required this.lowestMonitoring,
   });
 
   final String title;
   final bool showInKiloWatt;
   final int totalMonitoring;
   final double averageMonitoring;
+  final int highestMonitoring;
+  final int lowestMonitoring;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +56,36 @@ class InformationWidget extends StatelessWidget {
                   : LocaleKeys.average.tr(
                     namedArgs: <String, String>{
                       'average': averageMonitoring.toStringAsFixed(0),
+                    },
+                  ),
+              style: textTheme.headlineSmall,
+            ),
+            Text(
+              showInKiloWatt
+                  ? LocaleKeys.highest_kilo_watt.tr(
+                    namedArgs: <String, String>{
+                      'highest_kilo_watt': (highestMonitoring / 1000)
+                          .toStringAsFixed(0),
+                    },
+                  )
+                  : LocaleKeys.highest.tr(
+                    namedArgs: <String, String>{
+                      'highest': highestMonitoring.toString(),
+                    },
+                  ),
+              style: textTheme.headlineSmall,
+            ),
+            Text(
+              showInKiloWatt
+                  ? LocaleKeys.lowest_kilo_watt.tr(
+                    namedArgs: <String, String>{
+                      'lowest_kilo_watt': (lowestMonitoring / 1000)
+                          .toStringAsFixed(0),
+                    },
+                  )
+                  : LocaleKeys.lowest.tr(
+                    namedArgs: <String, String>{
+                      'lowest': lowestMonitoring.toString(),
                     },
                   ),
               style: textTheme.headlineSmall,

@@ -24,5 +24,9 @@ abstract class  LocaleKeys {
   static const total_kilo_watt = 'total_kilo_watt';
   static const average = 'average';
   static const average_kilo_watt = 'average_kilo_watt';
+  static const highest = 'highest';
+  static const highest_kilo_watt = 'highest_kilo_watt';
+  static const lowest = 'lowest';
+  static const lowest_kilo_watt = 'lowest_kilo_watt';
 
 }
