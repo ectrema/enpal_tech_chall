@@ -24,7 +24,9 @@ class CodegenLoader extends AssetLoader{
   "battery_charge": "Battery consumption",
   "no_data": "No data for this date",
   "kilo_watt": "{kilo_watt}kWh",
-  "show_in_kilo_watt": "Show in kWh"
+  "show_in_kilo_watt": "Show in kWh",
+  "generic_error": "An error occurred",
+  "no_internet_connection": "No internet connection detected. Please check your network settings and try again."
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en};
 }

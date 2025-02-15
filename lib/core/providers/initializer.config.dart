@@ -10,6 +10,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:enpal_tech_chall/core/clients/dio.client.dart' as _i127;
+import 'package:enpal_tech_chall/core/clients/interceptors/connectivity.interceptor.dart'
+    as _i238;
 import 'package:enpal_tech_chall/core/providers/injections/core.module.dart'
     as _i264;
 import 'package:enpal_tech_chall/core/providers/injections/data.module.dart'
@@ -23,6 +25,8 @@ import 'package:enpal_tech_chall/data/networking/endpoints/monitoring.endpoint.d
     as _i793;
 import 'package:enpal_tech_chall/domain/repositories/monitoring.repository.dart'
     as _i506;
+import 'package:enpal_tech_chall/domain/services/connectivity.service.dart'
+    as _i558;
 import 'package:enpal_tech_chall/domain/services/monitoring.service.dart'
     as _i202;
 import 'package:enpal_tech_chall/domain/use_cases/monitoring/get_monitoring.use_case.dart'
@@ -42,7 +46,16 @@ extension GetItInjectableX on _i174.GetIt {
     final domainModule = _$DomainModule();
     gh.factory<String>(() => coreModule.apiUrl());
     gh.singleton<_i894.AppTheme>(() => coreModule.appTheme());
+    gh.singletonAsync<_i558.ConnectivityService>(
+      () => dataModule.connectivityService(),
+    );
     gh.singleton<_i127.DioClient>(() => coreModule.dioClient(gh<String>()));
+    gh.singletonAsync<_i238.ConnectivityInterceptor>(
+      () async => coreModule.connectivityInterceptor(
+        gh<_i127.DioClient>(),
+        await getAsync<_i558.ConnectivityService>(),
+      ),
+    );
     gh.singleton<_i793.MonitoringEndpoint>(
       () => dataModule.monitoringEndpoint(gh<_i127.DioClient>()),
     );

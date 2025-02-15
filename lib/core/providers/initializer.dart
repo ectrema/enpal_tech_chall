@@ -10,4 +10,4 @@ final GetIt injector = GetIt.instance;
 /// Setup injector
 ///
 @InjectableInit()
-GetIt initializeInjections() => GetIt.I.init();
+Future<GetIt> initializeInjections() async => GetIt.I.init();

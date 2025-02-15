@@ -66,4 +66,16 @@ class Utils {
           ),
     );
   }
+
+  static void showNoInternetSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(LocaleKeys.no_internet_connection.tr())),
+    );
+  }
+
+  static void showGenericErrorSnackBar(BuildContext context) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(LocaleKeys.generic_error.tr())));
+  }
 }

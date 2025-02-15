@@ -26,8 +26,10 @@ class _SolarScreenState extends ConsumerState<SolarScreen> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final SolarViewModel viewModel = ref.read(solarViewModelProvider.notifier);
 
     return Scaffold(
+      key: viewModel.scaffoldKey,
       appBar: AppBar(
         title: Text(
           LocaleKeys.solar_generation.tr(),

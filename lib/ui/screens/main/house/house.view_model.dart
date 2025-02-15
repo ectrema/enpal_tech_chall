@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart' show DioException, DioExceptionType;
 import 'package:enpal_tech_chall/core/providers/initializer.dart';
+import 'package:enpal_tech_chall/core/utils/utils.dart';
 import 'package:enpal_tech_chall/domain/entities/monitoring.entity.dart';
 import 'package:enpal_tech_chall/domain/services/monitoring.service.dart';
 import 'package:enpal_tech_chall/ui/screens/main/house/house.view_state.dart';
+import 'package:flutter/material.dart' show GlobalKey, NavigatorState;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'house.view_model.g.dart';
@@ -17,6 +20,8 @@ class HouseViewModel extends _$HouseViewModel {
     return HouseViewModel._(monitoringService: injector<MonitoringService>());
   }
 
+  final GlobalKey<NavigatorState> scaffoldKey = GlobalKey<NavigatorState>();
+
   HouseViewModel._({required MonitoringService monitoringService})
     : _monitoringService = monitoringService;
 
@@ -24,9 +29,21 @@ class HouseViewModel extends _$HouseViewModel {
   HouseState build() => HouseState.initial();
 
   void setListener() {
-    _monitoringService.houseMonitoring.listen((List<MonitoringEntity> value) {
-      state = state.copyWith(monitoring: value);
-    });
+    _monitoringService.houseMonitoring.listen(
+      (List<MonitoringEntity> value) {
+        state = state.copyWith(monitoring: value);
+      },
+      onError: (Object error, StackTrace stackTrace) {
+        if (scaffoldKey.currentContext != null) {
+          if (error is DioException &&
+              error.type == DioExceptionType.connectionError) {
+            Utils.showNoInternetSnackBar(scaffoldKey.currentContext!);
+          } else {
+            Utils.showGenericErrorSnackBar(scaffoldKey.currentContext!);
+          }
+        }
+      },
+    );
   }
 
   Future<void> reloadData() async {

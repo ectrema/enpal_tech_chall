@@ -4,6 +4,7 @@ import 'package:enpal_tech_chall/data/monitoring/remote/monitoring.remote.data_s
 import 'package:enpal_tech_chall/data/networking/endpoints/monitoring.endpoint.dart';
 import 'package:enpal_tech_chall/data/repositories_impl/monitoring.repository.impl.dart';
 import 'package:enpal_tech_chall/domain/repositories/monitoring.repository.dart';
+import 'package:enpal_tech_chall/domain/services/connectivity.service.dart';
 import 'package:injectable/injectable.dart';
 
 /// Module to inject dependencies
@@ -22,4 +23,8 @@ abstract class DataModule {
   MonitoringRepositoryImpl monitoringRepository(
     MonitoringRemoteDataSource remoteDataSource,
   ) => MonitoringRepositoryImpl(remoteDataSource: remoteDataSource);
+
+  @singleton
+  Future<ConnectivityService> connectivityService() async =>
+      ConnectivityService.inject();
 }

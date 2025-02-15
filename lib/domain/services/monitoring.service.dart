@@ -29,20 +29,32 @@ final class MonitoringService {
   }
 
   Future<void> getSolarMonitoring(DateTime date) async {
-    final List<MonitoringEntity> solarMonitoring = await _getMonitoringUseCase
-        .execute((date, EnergyType.solar));
-    _solarMonitoring.add(solarMonitoring);
+    try {
+      final List<MonitoringEntity> solarMonitoring = await _getMonitoringUseCase
+          .execute((date, EnergyType.solar));
+      _solarMonitoring.add(solarMonitoring);
+    } catch (e) {
+      _solarMonitoring.addError(e);
+    }
   }
 
   Future<void> getBatteryMonitoring(DateTime date) async {
-    final List<MonitoringEntity> batteryMonitoring = await _getMonitoringUseCase
-        .execute((date, EnergyType.battery));
-    _batteryMonitoring.add(batteryMonitoring);
+    try {
+      final List<MonitoringEntity> batteryMonitoring =
+          await _getMonitoringUseCase.execute((date, EnergyType.battery));
+      _batteryMonitoring.add(batteryMonitoring);
+    } catch (e) {
+      _batteryMonitoring.addError(e);
+    }
   }
 
   Future<void> getHouseMonitoring(DateTime date) async {
-    final List<MonitoringEntity> houseMonitoring = await _getMonitoringUseCase
-        .execute((date, EnergyType.house));
-    _houseMonitoring.add(houseMonitoring);
+    try {
+      final List<MonitoringEntity> houseMonitoring = await _getMonitoringUseCase
+          .execute((date, EnergyType.house));
+      _houseMonitoring.add(houseMonitoring);
+    } catch (e) {
+      _houseMonitoring.addError(e);
+    }
   }
 }

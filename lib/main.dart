@@ -10,7 +10,7 @@ void main() async {
   // Initialize widgets
   WidgetsFlutterBinding.ensureInitialized();
 
-  final GetIt getIt = initializeInjections();
+  final GetIt getIt = await initializeInjections();
   await getIt.allReady();
   // Initialize translations
   await EasyLocalization.ensureInitialized();

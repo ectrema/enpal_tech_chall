@@ -26,8 +26,12 @@ class _BatteryScreenState extends ConsumerState<BatteryScreen> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final BatteryViewModel viewModel = ref.read(
+      batteryViewModelProvider.notifier,
+    );
 
     return Scaffold(
+      key: viewModel.scaffoldKey,
       appBar: AppBar(
         title: Text(
           LocaleKeys.battery_charge.tr(),

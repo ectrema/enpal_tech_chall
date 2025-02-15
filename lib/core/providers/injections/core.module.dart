@@ -1,5 +1,7 @@
 import 'package:enpal_tech_chall/core/clients/dio.client.dart';
+import 'package:enpal_tech_chall/core/clients/interceptors/connectivity.interceptor.dart';
 import 'package:enpal_tech_chall/core/theming/theme.dart';
+import 'package:enpal_tech_chall/domain/services/connectivity.service.dart';
 import 'package:injectable/injectable.dart';
 
 /// Module to inject dependencies
@@ -13,4 +15,13 @@ abstract class CoreModule {
 
   @singleton
   AppTheme appTheme() => AppTheme();
+
+  @singleton
+  ConnectivityInterceptor connectivityInterceptor(
+    DioClient dioClient,
+    ConnectivityService connectivityService,
+  ) => ConnectivityInterceptor(
+    dioClient: dioClient,
+    connectivityService: connectivityService,
+  );
 }

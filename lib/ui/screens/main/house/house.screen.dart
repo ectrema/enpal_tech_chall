@@ -26,8 +26,10 @@ class _HouseScreenState extends ConsumerState<HouseScreen> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final HouseViewModel viewModel = ref.read(houseViewModelProvider.notifier);
 
     return Scaffold(
+      key: viewModel.scaffoldKey,
       appBar: AppBar(
         title: Text(
           LocaleKeys.house_consumption.tr(),
