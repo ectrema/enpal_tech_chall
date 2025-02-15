@@ -4,15 +4,28 @@ import 'package:enpal_tech_chall/core/localizations/localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// Utility class providing helper methods for common functionality
 class Utils {
+  /// Formats a DateTime into a localized date string in dd/MM/yyyy format
   static String formatDate(DateTime date) {
     return DateFormat('dd/MM/yyyy').format(date);
   }
 
+  /// Formats a DateTime into a localized hour string in "h a" format (e.g. "3 PM")
   static String formatHour(DateTime date) {
     return DateFormat('h a').format(date);
   }
 
+  /// Shows a platform-adaptive date picker dialog
+  ///
+  /// On Android, shows Material date picker
+  /// On iOS, shows Cupertino date picker
+  ///
+  /// Parameters:
+  /// - [context]: Build context for showing the dialog
+  /// - [initialDate]: Initial date to show in the picker
+  ///
+  /// Returns selected DateTime or null if cancelled
   static Future<DateTime?> showNativeDatePicker({
     required BuildContext context,
     required DateTime initialDate,
@@ -44,6 +57,11 @@ class Utils {
     return date;
   }
 
+  /// Helper method to show a Cupertino-style modal popup with a date picker
+  ///
+  /// Parameters:
+  /// - [context]: Build context for showing the popup
+  /// - [child]: Widget to show in the popup (typically a CupertinoDatePicker)
   static Future<DateTime?> _showCupertinoDatePicker(
     BuildContext context,
     Widget child,
@@ -67,12 +85,18 @@ class Utils {
     );
   }
 
+  /// Shows a snackbar indicating no internet connection
+  ///
+  /// Uses localized string from LocaleKeys
   static void showNoInternetSnackBar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(LocaleKeys.no_internet_connection.tr())),
     );
   }
 
+  /// Shows a snackbar with a generic error message
+  ///
+  /// Uses localized string from LocaleKeys
   static void showGenericErrorSnackBar(BuildContext context) {
     ScaffoldMessenger.of(
       context,

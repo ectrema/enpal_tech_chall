@@ -7,16 +7,23 @@ export 'package:enpal_tech_chall/core/utils/extension.dart';
 
 part 'house.view_state.g.dart';
 
+/// State class for the House screen that holds all the UI-related state
+/// including monitoring data, date selection, display preferences, and connectivity status
 @CopyWith()
 class HouseState extends ViewStateAbs {
+  /// List of monitoring entities containing house power consumption data
   final List<MonitoringEntity> monitoring;
 
+  /// Selected date for viewing monitoring data
   final DateTime date;
 
+  /// Flag to determine if values should be shown in kilowatts (true) or watts (false)
   final bool showInKiloWatt;
 
+  /// Flag indicating if the device has internet connectivity
   final bool isConnected;
 
+  /// Creates a new instance of [HouseState] with the given parameters
   const HouseState({
     required this.monitoring,
     required this.date,
@@ -24,6 +31,7 @@ class HouseState extends ViewStateAbs {
     this.isConnected = true,
   }) : super();
 
+  /// Creates an initial state with empty monitoring data and current date
   HouseState.initial(this.isConnected)
     : monitoring = const <MonitoringEntity>[],
       date = DateTime.now(),
@@ -38,12 +46,18 @@ class HouseState extends ViewStateAbs {
   ];
 }
 
+/// Extension methods on [HouseState] for computed properties and helper functions
 extension OnHouseState on HouseState {
+  /// Returns true if device is offline and no monitoring data is available
   bool get showOfflineWidget => !isConnected && monitoring.isEmpty;
 
+  /// Calculates the total power consumption by summing all monitoring values
   int get totalMonitoring =>
       monitoring.fold(0, (int a, MonitoringEntity b) => a + (b.value ?? 0));
 
+  /// Calculates the average power consumption
+  /// For current date: total divided by current hour
+  /// For past dates: total divided by 24 hours
   double get averageMonitoring {
     if (DateTime.now().isSameDate(date)) {
       return totalMonitoring / DateTime.now().hour;
@@ -51,6 +65,8 @@ extension OnHouseState on HouseState {
     return totalMonitoring / 24;
   }
 
+  /// Returns the highest hourly power consumption value
+  /// Returns 0 if no monitoring data is available
   int get highestMonitoring {
     if (monitoring.isEmpty) return 0;
 
@@ -59,6 +75,8 @@ extension OnHouseState on HouseState {
         .toInt();
   }
 
+  /// Returns the lowest hourly power consumption value
+  /// Returns 0 if no monitoring data is available
   int get lowestMonitoring {
     if (monitoring.isEmpty) return 0;
 

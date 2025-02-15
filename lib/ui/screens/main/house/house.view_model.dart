@@ -10,15 +10,23 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'house.view_model.g.dart';
 
+/// ViewModel for the House screen that handles the business logic and state management
+/// using Riverpod for dependency injection and state management.
 ///
-/// [HouseViewModel]
-///
+/// This class manages:
+/// - House monitoring data fetching and updates
+/// - Connectivity status monitoring
+/// - Date selection for monitoring data
+/// - Display preferences (kW vs W)
 @riverpod
 class HouseViewModel extends _$HouseViewModel {
+  /// Service for handling house monitoring data operations
   final MonitoringService _monitoringService;
 
+  /// Service for monitoring device connectivity status
   final ConnectivityService _connectivityService;
 
+  /// Factory constructor that initializes the required services using dependency injection
   factory HouseViewModel() {
     return HouseViewModel._(
       monitoringService: injector<MonitoringService>(),
@@ -26,8 +34,10 @@ class HouseViewModel extends _$HouseViewModel {
     );
   }
 
+  /// Global key for accessing the scaffold state, used for showing snackbars
   final GlobalKey<NavigatorState> scaffoldKey = GlobalKey<NavigatorState>();
 
+  /// Private constructor that initializes services and sets up connectivity listener
   HouseViewModel._({
     required MonitoringService monitoringService,
     required ConnectivityService connectivityService,
@@ -39,6 +49,7 @@ class HouseViewModel extends _$HouseViewModel {
   @override
   HouseState build() => HouseState.initial(_connectivityService.isConnected);
 
+  /// Sets up a listener for connectivity changes and updates the state accordingly
   void _connectivityListener() {
     _connectivityService.isConnectedStream.listen((bool isConnected) {
       if (isConnected == state.isConnected) return;
@@ -50,6 +61,7 @@ class HouseViewModel extends _$HouseViewModel {
     });
   }
 
+  /// Sets up a listener for house monitoring data updates and error handling
   void setListener() {
     _monitoringService.houseMonitoring.listen(
       (List<MonitoringEntity> value) {
@@ -68,15 +80,18 @@ class HouseViewModel extends _$HouseViewModel {
     );
   }
 
+  /// Reloads the house monitoring data for the current date
   Future<void> reloadData() async {
     await _monitoringService.getHouseMonitoring(state.date);
   }
 
+  /// Updates the selected date and fetches new monitoring data
   void setDate(DateTime date) {
     state = state.copyWith(date: date, monitoring: <MonitoringEntity>[]);
     _monitoringService.getHouseMonitoring(date);
   }
 
+  /// Toggles between kilowatt and watt display units
   void setShowInKiloWatt(bool showInKiloWatt) {
     state = state.copyWith(showInKiloWatt: showInKiloWatt);
   }

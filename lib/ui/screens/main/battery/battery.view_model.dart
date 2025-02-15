@@ -10,15 +10,23 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'battery.view_model.g.dart';
 
+/// ViewModel for the Battery screen that handles the business logic and state management
+/// using Riverpod for dependency injection and state management.
 ///
-/// [BatteryViewModel]
-///
+/// This class manages:
+/// - Battery monitoring data fetching and updates
+/// - Connectivity status monitoring
+/// - Date selection for monitoring data
+/// - Display preferences (kW vs W)
 @riverpod
 class BatteryViewModel extends _$BatteryViewModel {
+  /// Service for handling battery monitoring data operations
   final MonitoringService _monitoringService;
 
+  /// Service for monitoring device connectivity status
   final ConnectivityService _connectivityService;
 
+  /// Factory constructor that initializes the required services using dependency injection
   factory BatteryViewModel() {
     return BatteryViewModel._(
       monitoringService: injector<MonitoringService>(),
@@ -26,8 +34,10 @@ class BatteryViewModel extends _$BatteryViewModel {
     );
   }
 
+  /// Global key for accessing the scaffold state, used for showing snackbars
   final GlobalKey<NavigatorState> scaffoldKey = GlobalKey<NavigatorState>();
 
+  /// Private constructor that initializes services and sets up connectivity listener
   BatteryViewModel._({
     required MonitoringService monitoringService,
     required ConnectivityService connectivityService,
@@ -40,6 +50,7 @@ class BatteryViewModel extends _$BatteryViewModel {
   BatteryState build() =>
       BatteryState.initial(_connectivityService.isConnected);
 
+  /// Sets up a listener for connectivity changes and updates the state accordingly
   void _connectivityListener() {
     _connectivityService.isConnectedStream.listen((bool isConnected) {
       if (isConnected == state.isConnected) return;
@@ -51,6 +62,7 @@ class BatteryViewModel extends _$BatteryViewModel {
     });
   }
 
+  /// Sets up a listener for battery monitoring data updates and error handling
   void setListener() {
     _monitoringService.batteryMonitoring.listen(
       (List<MonitoringEntity> value) {
@@ -69,15 +81,18 @@ class BatteryViewModel extends _$BatteryViewModel {
     );
   }
 
+  /// Reloads the battery monitoring data for the current date
   Future<void> reloadData() async {
     await _monitoringService.getBatteryMonitoring(state.date);
   }
 
+  /// Updates the selected date and fetches new monitoring data
   void setDate(DateTime date) {
     state = state.copyWith(date: date, monitoring: <MonitoringEntity>[]);
     _monitoringService.getBatteryMonitoring(date);
   }
 
+  /// Toggles between kilowatt and watt display units
   void setShowInKiloWatt(bool showInKiloWatt) {
     state = state.copyWith(showInKiloWatt: showInKiloWatt);
   }

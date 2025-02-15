@@ -10,15 +10,23 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'solar.view_model.g.dart';
 
+/// ViewModel for the Solar screen that handles the business logic and state management
+/// using Riverpod for dependency injection and state management.
 ///
-/// [SolarViewModel]
-///
+/// This class manages:
+/// - Solar monitoring data fetching and updates
+/// - Connectivity status monitoring
+/// - Date selection for monitoring data
+/// - Display preferences (kW vs W)
 @riverpod
 class SolarViewModel extends _$SolarViewModel {
+  /// Service for handling solar monitoring data operations
   final MonitoringService _monitoringService;
 
+  /// Service for monitoring device connectivity status
   final ConnectivityService _connectivityService;
 
+  /// Factory constructor that initializes the required services using dependency injection
   factory SolarViewModel() {
     return SolarViewModel._(
       monitoringService: injector<MonitoringService>(),
@@ -26,8 +34,10 @@ class SolarViewModel extends _$SolarViewModel {
     );
   }
 
+  /// Global key for accessing the scaffold state, used for showing snackbars
   final GlobalKey<NavigatorState> scaffoldKey = GlobalKey<NavigatorState>();
 
+  /// Private constructor that initializes services and sets up connectivity listener
   SolarViewModel._({
     required MonitoringService monitoringService,
     required ConnectivityService connectivityService,
@@ -39,6 +49,7 @@ class SolarViewModel extends _$SolarViewModel {
   @override
   SolarState build() => SolarState.initial(_connectivityService.isConnected);
 
+  /// Sets up a listener for connectivity changes and updates the state accordingly
   void _connectivityListener() {
     _connectivityService.isConnectedStream.listen((bool isConnected) {
       if (isConnected == state.isConnected) return;
@@ -50,6 +61,7 @@ class SolarViewModel extends _$SolarViewModel {
     });
   }
 
+  /// Sets up a listener for solar monitoring data updates and error handling
   void setListener() {
     _monitoringService.solarMonitoring.listen(
       (List<MonitoringEntity> value) {
@@ -68,15 +80,18 @@ class SolarViewModel extends _$SolarViewModel {
     );
   }
 
+  /// Reloads the solar monitoring data for the current date
   Future<void> reloadData() async {
     await _monitoringService.getSolarMonitoring(state.date);
   }
 
+  /// Updates the selected date and fetches new monitoring data
   void setDate(DateTime date) {
     state = state.copyWith(date: date, monitoring: <MonitoringEntity>[]);
     _monitoringService.getSolarMonitoring(date);
   }
 
+  /// Toggles between kilowatt and watt display units
   void setShowInKiloWatt(bool showInKiloWatt) {
     state = state.copyWith(showInKiloWatt: showInKiloWatt);
   }
