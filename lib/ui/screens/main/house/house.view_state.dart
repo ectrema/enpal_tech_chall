@@ -12,12 +12,19 @@ class HouseState extends ViewStateAbs {
 
   final DateTime date;
 
-  const HouseState({required this.monitoring, required this.date}) : super();
+  final bool showInKiloWatt;
+
+  const HouseState({
+    required this.monitoring,
+    required this.date,
+    this.showInKiloWatt = false,
+  }) : super();
 
   HouseState.initial()
     : monitoring = const <MonitoringEntity>[],
-      date = DateTime.now();
+      date = DateTime.now(),
+      showInKiloWatt = false;
 
   @override
-  List<Object?> get props => <Object?>[monitoring, date];
+  List<Object?> get props => <Object?>[monitoring, date, showInKiloWatt];
 }

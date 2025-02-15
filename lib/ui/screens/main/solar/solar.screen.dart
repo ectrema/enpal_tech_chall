@@ -1,8 +1,9 @@
 import 'package:enpal_tech_chall/core/localizations/localizations.dart';
-import 'package:enpal_tech_chall/core/utils/utils.dart';
 import 'package:enpal_tech_chall/ui/screens/main/solar/solar.view_model.dart';
 import 'package:enpal_tech_chall/ui/screens/main/solar/solar.view_state.dart';
 import 'package:enpal_tech_chall/ui/widget/custom_line_chart.dart';
+import 'package:enpal_tech_chall/ui/widget/custom_text_button.dart';
+import 'package:enpal_tech_chall/ui/widget/show_in_kilow_watt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,7 +37,7 @@ class _SolarScreenState extends ConsumerState<SolarScreen> {
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[const _Header(), const _Graph()],
+          children: const <Widget>[_Header(), _Graph(), _Footer()],
         ),
       ),
     );
@@ -55,25 +56,7 @@ class _Header extends ConsumerWidget {
 
     return Padding(
       padding: const EdgeInsets.only(top: 16),
-      child: TextButton(
-        onPressed: () async {
-          final DateTime? selectedDate = await Utils.showNativeDatePicker(
-            context: context,
-            initialDate: date,
-          );
-          if (selectedDate != null) {
-            viewModel.setDate(selectedDate);
-          }
-        },
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(Utils.formatDate(date)),
-            const SizedBox(width: 8),
-            const Icon(Icons.calendar_today, size: 16),
-          ],
-        ),
-      ),
+      child: SelectDateButton(date: date, onPressed: viewModel.setDate),
     );
   }
 }
@@ -89,6 +72,10 @@ class _Graph extends ConsumerWidget {
       ),
     );
 
+    final bool showInKiloWatt = ref.watch(
+      solarViewModelProvider.select((SolarState value) => value.showInKiloWatt),
+    );
+
     if (data.isEmpty) {
       return Center(child: Text(LocaleKeys.no_data.tr()));
     }
@@ -97,8 +84,25 @@ class _Graph extends ConsumerWidget {
       aspectRatio: 1.3,
       child: Padding(
         padding: const EdgeInsets.only(right: 18, top: 24),
-        child: CustomLineChart(data: data),
+        child: CustomLineChart(data: data, showInKiloWatt: showInKiloWatt),
       ),
+    );
+  }
+}
+
+class _Footer extends ConsumerWidget {
+  const _Footer();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bool showInKiloWatt = ref.watch(
+      solarViewModelProvider.select((SolarState value) => value.showInKiloWatt),
+    );
+    final SolarViewModel viewModel = ref.read(solarViewModelProvider.notifier);
+
+    return ShowInKiloWatt(
+      showInKiloWatt: showInKiloWatt,
+      onChanged: viewModel.setShowInKiloWatt,
     );
   }
 }

@@ -11,5 +11,7 @@ abstract class  LocaleKeys {
   static const house_consumption = 'house_consumption';
   static const battery_charge = 'battery_charge';
   static const no_data = 'no_data';
+  static const kilo_watt = 'kilo_watt';
+  static const show_in_kilo_watt = 'show_in_kilo_watt';
 
 }

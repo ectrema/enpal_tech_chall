@@ -33,4 +33,8 @@ class SolarViewModel extends _$SolarViewModel {
     state = state.copyWith(date: date);
     _monitoringService.getSolarMonitoring(date);
   }
+
+  void setShowInKiloWatt(bool showInKiloWatt) {
+    state = state.copyWith(showInKiloWatt: showInKiloWatt);
+  }
 }

@@ -3,6 +3,7 @@ import 'package:enpal_tech_chall/core/utils/utils.dart';
 import 'package:enpal_tech_chall/ui/screens/main/house/house.view_model.dart';
 import 'package:enpal_tech_chall/ui/screens/main/house/house.view_state.dart';
 import 'package:enpal_tech_chall/ui/widget/custom_line_chart.dart';
+import 'package:enpal_tech_chall/ui/widget/show_in_kilow_watt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,7 +37,7 @@ class _HouseScreenState extends ConsumerState<HouseScreen> {
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[const _Header(), const _Graph()],
+          children: const <Widget>[_Header(), _Graph(), _Footer()],
         ),
       ),
     );
@@ -88,6 +89,9 @@ class _Graph extends ConsumerWidget {
         (HouseState value) => value.monitoring.hourlySum,
       ),
     );
+    final bool showInKiloWatt = ref.watch(
+      houseViewModelProvider.select((HouseState value) => value.showInKiloWatt),
+    );
 
     if (data.isEmpty) {
       return Center(child: Text(LocaleKeys.no_data.tr()));
@@ -97,8 +101,25 @@ class _Graph extends ConsumerWidget {
       aspectRatio: 1.3,
       child: Padding(
         padding: const EdgeInsets.only(right: 18, top: 24),
-        child: CustomLineChart(data: data),
+        child: CustomLineChart(data: data, showInKiloWatt: showInKiloWatt),
       ),
+    );
+  }
+}
+
+class _Footer extends ConsumerWidget {
+  const _Footer();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bool showInKiloWatt = ref.watch(
+      houseViewModelProvider.select((HouseState value) => value.showInKiloWatt),
+    );
+    final HouseViewModel viewModel = ref.read(houseViewModelProvider.notifier);
+
+    return ShowInKiloWatt(
+      showInKiloWatt: showInKiloWatt,
+      onChanged: viewModel.setShowInKiloWatt,
     );
   }
 }

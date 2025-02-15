@@ -4,9 +4,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class CustomLineChart extends StatelessWidget {
-  const CustomLineChart({super.key, required this.data});
+  const CustomLineChart({
+    super.key,
+    required this.data,
+    required this.showInKiloWatt,
+  });
 
   final Map<DateTime, double> data;
+
+  final bool showInKiloWatt;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +30,8 @@ class CustomLineChart extends StatelessWidget {
             spots:
                 data.entries.map((MapEntry<DateTime, double> e) {
                   final DateTime index = e.key;
-                  final double value = e.value;
+                  final double value =
+                      showInKiloWatt ? e.value / 1000 : e.value;
                   return FlSpot(index.hour.toDouble(), value);
                 }).toList(),
             dotData: const FlDotData(show: false),
@@ -101,7 +108,9 @@ class CustomLineChart extends StatelessWidget {
                     ),
                     TextSpan(
                       text:
-                          '\n${LocaleKeys.watts.tr(namedArgs: <String, String>{'watts': power.toInt().toString()})}',
+                          showInKiloWatt
+                              ? '\n${LocaleKeys.kilo_watt.tr(namedArgs: <String, String>{'kilo_watt': power.toStringAsFixed(2)})}'
+                              : '\n${LocaleKeys.watts.tr(namedArgs: <String, String>{'watts': power.toInt().toString()})}',
                       style: textTheme.titleLarge,
                     ),
                   ],

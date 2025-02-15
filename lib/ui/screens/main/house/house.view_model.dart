@@ -33,4 +33,8 @@ class HouseViewModel extends _$HouseViewModel {
     state = state.copyWith(date: date);
     _monitoringService.getHouseMonitoring(date);
   }
+
+  void setShowInKiloWatt(bool showInKiloWatt) {
+    state = state.copyWith(showInKiloWatt: showInKiloWatt);
+  }
 }

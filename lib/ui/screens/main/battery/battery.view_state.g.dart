@@ -11,13 +11,19 @@ abstract class _$BatteryStateCWProxy {
 
   BatteryState date(DateTime date);
 
+  BatteryState showInKiloWatt(bool showInKiloWatt);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BatteryState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
   /// ```dart
   /// BatteryState(...).copyWith(id: 12, name: "My name")
   /// ````
-  BatteryState call({List<MonitoringEntity> monitoring, DateTime date});
+  BatteryState call({
+    List<MonitoringEntity> monitoring,
+    DateTime date,
+    bool showInKiloWatt,
+  });
 }
 
 /// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfBatteryState.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfBatteryState.copyWith.fieldName(...)`
@@ -34,6 +40,10 @@ class _$BatteryStateCWProxyImpl implements _$BatteryStateCWProxy {
   BatteryState date(DateTime date) => this(date: date);
 
   @override
+  BatteryState showInKiloWatt(bool showInKiloWatt) =>
+      this(showInKiloWatt: showInKiloWatt);
+
+  @override
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `BatteryState(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -43,6 +53,7 @@ class _$BatteryStateCWProxyImpl implements _$BatteryStateCWProxy {
   BatteryState call({
     Object? monitoring = const $CopyWithPlaceholder(),
     Object? date = const $CopyWithPlaceholder(),
+    Object? showInKiloWatt = const $CopyWithPlaceholder(),
   }) {
     return BatteryState(
       monitoring:
@@ -55,6 +66,11 @@ class _$BatteryStateCWProxyImpl implements _$BatteryStateCWProxy {
               ? _value.date
               // ignore: cast_nullable_to_non_nullable
               : date as DateTime,
+      showInKiloWatt:
+          showInKiloWatt == const $CopyWithPlaceholder()
+              ? _value.showInKiloWatt
+              // ignore: cast_nullable_to_non_nullable
+              : showInKiloWatt as bool,
     );
   }
 }

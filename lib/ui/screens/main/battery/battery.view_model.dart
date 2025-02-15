@@ -33,4 +33,8 @@ class BatteryViewModel extends _$BatteryViewModel {
     state = state.copyWith(date: date);
     _monitoringService.getBatteryMonitoring(date);
   }
+
+  void setShowInKiloWatt(bool showInKiloWatt) {
+    state = state.copyWith(showInKiloWatt: showInKiloWatt);
+  }
 }
