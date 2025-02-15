@@ -3,6 +3,7 @@ import 'package:enpal_tech_chall/ui/screens/main/battery/battery.view_model.dart
 import 'package:enpal_tech_chall/ui/screens/main/battery/battery.view_state.dart';
 import 'package:enpal_tech_chall/ui/widget/custom_line_chart.dart';
 import 'package:enpal_tech_chall/ui/widget/custom_text_button.dart';
+import 'package:enpal_tech_chall/ui/widget/information_widget.dart';
 import 'package:enpal_tech_chall/ui/widget/no_internet_widget.dart';
 import 'package:enpal_tech_chall/ui/widget/show_in_kilow_watt.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,7 @@ class _BatteryScreenState extends ConsumerState<BatteryScreen> {
                     _Header(),
                     _Graph(),
                     _Footer(),
+                    _SolarInfo(),
                   ]),
                 ),
               ],
@@ -134,6 +136,37 @@ class _Footer extends ConsumerWidget {
     return ShowInKiloWatt(
       showInKiloWatt: showInKiloWatt,
       onChanged: viewModel.setShowInKiloWatt,
+    );
+  }
+}
+
+class _SolarInfo extends ConsumerWidget {
+  const _SolarInfo();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final int totalMonitoring = ref.watch(
+      batteryViewModelProvider.select(
+        (BatteryState value) => value.totalMonitoring,
+      ),
+    );
+    final bool showInKiloWatt = ref.watch(
+      batteryViewModelProvider.select(
+        (BatteryState value) => value.showInKiloWatt,
+      ),
+    );
+
+    final double averageMonitoring = ref.watch(
+      batteryViewModelProvider.select(
+        (BatteryState value) => value.averageMonitoring,
+      ),
+    );
+
+    return InformationWidget(
+      title: LocaleKeys.battery_info.tr(),
+      showInKiloWatt: showInKiloWatt,
+      totalMonitoring: totalMonitoring,
+      averageMonitoring: averageMonitoring,
     );
   }
 }

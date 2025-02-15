@@ -1,4 +1,5 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:enpal_tech_chall/core/utils/extension.dart';
 import 'package:enpal_tech_chall/domain/entities/monitoring.entity.dart';
 import 'package:enpal_tech_chall/ui/abstraction/view_state_abs.dart';
 
@@ -26,7 +27,7 @@ class HouseState extends ViewStateAbs {
   HouseState.initial(this.isConnected)
     : monitoring = const <MonitoringEntity>[],
       date = DateTime.now(),
-      showInKiloWatt = false;
+      showInKiloWatt = true;
 
   @override
   List<Object?> get props => <Object?>[
@@ -39,4 +40,14 @@ class HouseState extends ViewStateAbs {
 
 extension OnHouseState on HouseState {
   bool get showOfflineWidget => !isConnected && monitoring.isEmpty;
+
+  int get totalMonitoring =>
+      monitoring.fold(0, (int a, MonitoringEntity b) => a + (b.value ?? 0));
+
+  double get averageMonitoring {
+    if (DateTime.now().isSameDate(date)) {
+      return totalMonitoring / DateTime.now().hour;
+    }
+    return totalMonitoring / 24;
+  }
 }

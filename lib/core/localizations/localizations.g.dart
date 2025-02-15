@@ -28,7 +28,14 @@ class CodegenLoader extends AssetLoader{
   "generic_error": "An error occurred",
   "no_internet_connection": "No internet connection detected. Please check your network settings and try again.",
   "no_internet_connection_title": "No internet connection",
-  "retry": "Retry"
+  "retry": "Retry",
+  "solar_info": "Solar Info",
+  "house_info": "House Info",
+  "battery_info": "Battery Info",
+  "total": "Total : {watts}W",
+  "total_kilo_watt": "Total : {kilo_watt}kWh",
+  "average": "Average : {average}W",
+  "average_kilo_watt": "Average : {average_kilo_watt}kWh"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": _en};
 }

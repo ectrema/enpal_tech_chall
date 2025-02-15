@@ -17,5 +17,12 @@ abstract class  LocaleKeys {
   static const no_internet_connection = 'no_internet_connection';
   static const no_internet_connection_title = 'no_internet_connection_title';
   static const retry = 'retry';
+  static const solar_info = 'solar_info';
+  static const house_info = 'house_info';
+  static const battery_info = 'battery_info';
+  static const total = 'total';
+  static const total_kilo_watt = 'total_kilo_watt';
+  static const average = 'average';
+  static const average_kilo_watt = 'average_kilo_watt';
 
 }
