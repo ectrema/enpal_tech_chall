@@ -19,7 +19,7 @@ class _SolarScreenState extends ConsumerState<SolarScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
-      ref.read(solarViewModelProvider.notifier).getMonitoring();
+      ref.read(solarViewModelProvider.notifier).setListener();
     });
   }
 
@@ -35,9 +35,19 @@ class _SolarScreenState extends ConsumerState<SolarScreen> {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[_Header(), _Graph(), _Footer()],
+        child: RefreshIndicator(
+          onRefresh: ref.read(solarViewModelProvider.notifier).reloadData,
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate(const <Widget>[
+                  _Header(),
+                  _Graph(),
+                  _Footer(),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -54,9 +64,12 @@ class _Header extends ConsumerWidget {
     );
     final SolarViewModel viewModel = ref.read(solarViewModelProvider.notifier);
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 16),
-      child: SelectDateButton(date: date, onPressed: viewModel.setDate),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const SizedBox(height: 16),
+        SelectDateButton(date: date, onPressed: viewModel.setDate),
+      ],
     );
   }
 }
@@ -75,10 +88,6 @@ class _Graph extends ConsumerWidget {
     final bool showInKiloWatt = ref.watch(
       solarViewModelProvider.select((SolarState value) => value.showInKiloWatt),
     );
-
-    if (data.isEmpty) {
-      return Center(child: Text(LocaleKeys.no_data.tr()));
-    }
 
     return AspectRatio(
       aspectRatio: 1.3,

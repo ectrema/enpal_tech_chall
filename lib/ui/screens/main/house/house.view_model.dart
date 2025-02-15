@@ -23,10 +23,14 @@ class HouseViewModel extends _$HouseViewModel {
   @override
   HouseState build() => HouseState.initial();
 
-  Future<void> getMonitoring() async {
+  void setListener() {
     _monitoringService.houseMonitoring.listen((List<MonitoringEntity> value) {
       state = state.copyWith(monitoring: value);
     });
+  }
+
+  Future<void> reloadData() async {
+    await _monitoringService.getHouseMonitoring(state.date);
   }
 
   void setDate(DateTime date) {

@@ -23,10 +23,14 @@ class SolarViewModel extends _$SolarViewModel {
   @override
   SolarState build() => SolarState.initial();
 
-  Future<void> getMonitoring() async {
+  void setListener() {
     _monitoringService.solarMonitoring.listen((List<MonitoringEntity> value) {
       state = state.copyWith(monitoring: value);
     });
+  }
+
+  Future<void> reloadData() async {
+    await _monitoringService.getSolarMonitoring(state.date);
   }
 
   void setDate(DateTime date) {

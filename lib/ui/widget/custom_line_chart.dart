@@ -19,6 +19,10 @@ class CustomLineChart extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
 
+    if (data.isEmpty) {
+      return Center(child: Text(LocaleKeys.no_data.tr()));
+    }
+
     return LineChart(
       transformationConfig: FlTransformationConfig(
         scaleAxis: FlScaleAxis.horizontal,

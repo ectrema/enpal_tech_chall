@@ -23,10 +23,14 @@ class BatteryViewModel extends _$BatteryViewModel {
   @override
   BatteryState build() => BatteryState.initial();
 
-  Future<void> getMonitoring() async {
+  void setListener() {
     _monitoringService.batteryMonitoring.listen((List<MonitoringEntity> value) {
       state = state.copyWith(monitoring: value);
     });
+  }
+
+  Future<void> reloadData() async {
+    await _monitoringService.getBatteryMonitoring(state.date);
   }
 
   void setDate(DateTime date) {

@@ -1,8 +1,8 @@
 import 'package:enpal_tech_chall/core/localizations/localizations.dart';
-import 'package:enpal_tech_chall/core/utils/utils.dart';
 import 'package:enpal_tech_chall/ui/screens/main/battery/battery.view_model.dart';
 import 'package:enpal_tech_chall/ui/screens/main/battery/battery.view_state.dart';
 import 'package:enpal_tech_chall/ui/widget/custom_line_chart.dart';
+import 'package:enpal_tech_chall/ui/widget/custom_text_button.dart';
 import 'package:enpal_tech_chall/ui/widget/show_in_kilow_watt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,7 +19,7 @@ class _BatteryScreenState extends ConsumerState<BatteryScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
-      ref.read(batteryViewModelProvider.notifier).getMonitoring();
+      ref.read(batteryViewModelProvider.notifier).setListener();
     });
   }
 
@@ -35,9 +35,19 @@ class _BatteryScreenState extends ConsumerState<BatteryScreen> {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[_Header(), _Graph(), _Footer()],
+        child: RefreshIndicator(
+          onRefresh: ref.read(batteryViewModelProvider.notifier).reloadData,
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate(const <Widget>[
+                  _Header(),
+                  _Graph(),
+                  _Footer(),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -56,27 +66,12 @@ class _Header extends ConsumerWidget {
       batteryViewModelProvider.notifier,
     );
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 16),
-      child: TextButton(
-        onPressed: () async {
-          final DateTime? selectedDate = await Utils.showNativeDatePicker(
-            context: context,
-            initialDate: date,
-          );
-          if (selectedDate != null) {
-            viewModel.setDate(selectedDate);
-          }
-        },
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(Utils.formatDate(date)),
-            const SizedBox(width: 8),
-            const Icon(Icons.calendar_today, size: 16),
-          ],
-        ),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const SizedBox(height: 16),
+        SelectDateButton(date: date, onPressed: viewModel.setDate),
+      ],
     );
   }
 }
@@ -97,10 +92,6 @@ class _Graph extends ConsumerWidget {
         (BatteryState value) => value.showInKiloWatt,
       ),
     );
-
-    if (data.isEmpty) {
-      return Center(child: Text(LocaleKeys.no_data.tr()));
-    }
 
     return AspectRatio(
       aspectRatio: 1.3,
