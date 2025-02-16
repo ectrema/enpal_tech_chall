@@ -6,11 +6,16 @@ part of 'battery.view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$batteryViewModelHash() => r'65a004b48d873f53d2f9b36a9249779942f2ae5c';
+String _$batteryViewModelHash() => r'56ecbd49b57f576ebe2acbf605a5b3f1dad9c3c7';
 
+/// ViewModel for the Battery screen that handles the business logic and state management
+/// using Riverpod for dependency injection and state management.
 ///
-/// [BatteryViewModel]
-///
+/// This class manages:
+/// - Battery monitoring data fetching and updates
+/// - Connectivity status monitoring
+/// - Date selection for monitoring data
+/// - Display preferences (kW vs W)
 ///
 /// Copied from [BatteryViewModel].
 @ProviderFor(BatteryViewModel)

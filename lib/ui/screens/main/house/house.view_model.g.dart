@@ -8,9 +8,14 @@ part of 'house.view_model.dart';
 
 String _$houseViewModelHash() => r'a90d49e1552ab3c99228b468e92f5ce47ee652cc';
 
+/// ViewModel for the House screen that handles the business logic and state management
+/// using Riverpod for dependency injection and state management.
 ///
-/// [HouseViewModel]
-///
+/// This class manages:
+/// - House monitoring data fetching and updates
+/// - Connectivity status monitoring
+/// - Date selection for monitoring data
+/// - Display preferences (kW vs W)
 ///
 /// Copied from [HouseViewModel].
 @ProviderFor(HouseViewModel)

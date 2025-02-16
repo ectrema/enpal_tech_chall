@@ -33,7 +33,7 @@ final class ConnectivityService {
     final Connectivity connectivity = Connectivity();
     final List<ConnectivityResult> result =
         await connectivity.checkConnectivity();
-    return ConnectivityService._(initialValue: _containsInternet(result));
+    return ConnectivityService._(initialValue: containsInternet(result));
   }
 
   /// Initializes the connectivity change stream listener
@@ -43,14 +43,14 @@ final class ConnectivityService {
     Connectivity().onConnectivityChanged.listen((
       List<ConnectivityResult> result,
     ) {
-      _isConnected.add(_containsInternet(result));
+      _isConnected.add(containsInternet(result));
     });
   }
 
   /// Helper method to determine if device has internet connectivity
   ///
   /// Returns true if device is connected to WiFi or mobile data
-  static bool _containsInternet(List<ConnectivityResult> result) {
+  static bool containsInternet(List<ConnectivityResult> result) {
     return result.contains(ConnectivityResult.wifi) ||
         result.contains(ConnectivityResult.mobile);
   }

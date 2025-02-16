@@ -8,9 +8,14 @@ part of 'solar.view_model.dart';
 
 String _$solarViewModelHash() => r'db2c30232cc7684a78a79b8f22725d836806d53d';
 
+/// ViewModel for the Solar screen that handles the business logic and state management
+/// using Riverpod for dependency injection and state management.
 ///
-/// [SolarViewModel]
-///
+/// This class manages:
+/// - Solar monitoring data fetching and updates
+/// - Connectivity status monitoring
+/// - Date selection for monitoring data
+/// - Display preferences (kW vs W)
 ///
 /// Copied from [SolarViewModel].
 @ProviderFor(SolarViewModel)

@@ -8,7 +8,10 @@ part of 'main.view_model.dart';
 
 String _$mainViewModelHash() => r'cfcb5f862248ca5771ad05975546a4049f551867';
 
-/// See also [MainViewModel].
+/// [MainViewModel] handles the state and logic for the main navigation screen
+/// It manages the current navigation index and provides navigation bar information
+///
+/// Copied from [MainViewModel].
 @ProviderFor(MainViewModel)
 final mainViewModelProvider =
     AutoDisposeNotifierProvider<MainViewModel, MainState>.internal(
