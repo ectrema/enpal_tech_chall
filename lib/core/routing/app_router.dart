@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:enpal_tech_chall/core/enums/router.enum.dart';
 import 'package:enpal_tech_chall/ui/screens/main/battery/battery.screen.dart';
 import 'package:enpal_tech_chall/ui/screens/main/house/house.screen.dart';

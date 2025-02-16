@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:enpal_tech_chall/domain/repositories/monitoring.repository.dart';
 import 'package:enpal_tech_chall/domain/services/monitoring.service.dart';
 import 'package:enpal_tech_chall/domain/use_cases/monitoring/get_monitoring.use_case.dart';

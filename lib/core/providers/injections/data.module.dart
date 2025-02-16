@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:enpal_tech_chall/core/clients/dio.client.dart';
 import 'package:enpal_tech_chall/data/monitoring/remote/impl/monitoring.remote.data_source.impl.dart';
 import 'package:enpal_tech_chall/data/monitoring/remote/monitoring.remote.data_source.dart';

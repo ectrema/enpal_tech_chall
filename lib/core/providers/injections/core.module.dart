@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:enpal_tech_chall/core/clients/dio.client.dart';
 import 'package:enpal_tech_chall/core/clients/interceptors/connectivity.interceptor.dart';
 import 'package:enpal_tech_chall/core/theming/theme.dart';

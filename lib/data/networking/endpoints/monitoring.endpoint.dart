@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:dio/dio.dart';
 import 'package:enpal_tech_chall/core/clients/dio.client.dart';
 import 'package:enpal_tech_chall/core/enums/energy_type.enum.dart';
