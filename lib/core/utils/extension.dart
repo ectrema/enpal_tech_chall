@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:enpal_tech_chall/domain/entities/monitoring.entity.dart';
 
 /// Extension on List<[MonitoringEntity]> to add hourly sum functionality
@@ -34,9 +35,9 @@ extension OnListMonitoring on List<MonitoringEntity> {
   /// Checks if monitoring data can be added for a given hour
   /// Returns true if there is monitoring data for that hour and it's before current time
   bool _canAddMonitoring(int hour) {
-    return firstWhere(
+    return firstWhereOrNull(
           (MonitoringEntity e) => e.date?.hour == hour,
-        ).date?.isBefore(DateTime.now()) ==
+        )?.date?.isBefore(DateTime.now()) ==
         true;
   }
 }

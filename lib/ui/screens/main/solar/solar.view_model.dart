@@ -42,9 +42,7 @@ class SolarViewModel extends _$SolarViewModel {
     required MonitoringService monitoringService,
     required ConnectivityService connectivityService,
   }) : _monitoringService = monitoringService,
-       _connectivityService = connectivityService {
-    _connectivityListener();
-  }
+       _connectivityService = connectivityService;
 
   @override
   SolarState build() => SolarState.initial(_connectivityService.isConnected);
@@ -78,6 +76,7 @@ class SolarViewModel extends _$SolarViewModel {
         }
       },
     );
+    _connectivityListener();
   }
 
   /// Reloads the solar monitoring data for the current date

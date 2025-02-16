@@ -9,7 +9,7 @@ import 'package:rxdart/rxdart.dart' show BehaviorSubject;
 /// - Maintains a stream of connectivity status (connected/disconnected)
 /// - Handles connectivity changes through platform APIs
 /// - Provides broadcast streams that can be listened to by multiple subscribers
-final class ConnectivityService {
+interface class ConnectivityService {
   /// Stream controller for connectivity status
   final BehaviorSubject<bool> _isConnected;
 

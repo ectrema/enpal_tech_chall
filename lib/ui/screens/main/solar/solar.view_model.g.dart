@@ -6,7 +6,7 @@ part of 'solar.view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$solarViewModelHash() => r'db2c30232cc7684a78a79b8f22725d836806d53d';
+String _$solarViewModelHash() => r'47213bd58ab8ab692edcfb4de568db01b96f30ca';
 
 /// ViewModel for the Solar screen that handles the business logic and state management
 /// using Riverpod for dependency injection and state management.

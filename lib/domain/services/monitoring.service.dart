@@ -10,7 +10,7 @@ import 'package:rxdart/rxdart.dart' show BehaviorSubject;
 /// - Maintains separate streams for solar, battery and house monitoring data
 /// - Handles data fetching and error handling for each energy type
 /// - Provides broadcast streams that can be listened to by multiple subscribers
-final class MonitoringService {
+interface class MonitoringService {
   /// Use case for retrieving monitoring data
   final GetMonitoringUseCase _getMonitoringUseCase;
 
