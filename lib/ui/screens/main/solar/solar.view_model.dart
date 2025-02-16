@@ -68,7 +68,8 @@ class SolarViewModel extends _$SolarViewModel {
       onError: (Object error, StackTrace stackTrace) {
         if (scaffoldKey.currentContext != null) {
           if (error is DioException &&
-              error.type == DioExceptionType.connectionError) {
+              error.type == DioExceptionType.connectionError &&
+              !state.isConnected) {
             Utils.showNoInternetSnackBar(scaffoldKey.currentContext!);
           } else {
             Utils.showGenericErrorSnackBar(scaffoldKey.currentContext!);

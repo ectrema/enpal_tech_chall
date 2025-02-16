@@ -42,9 +42,7 @@ class BatteryViewModel extends _$BatteryViewModel {
     required MonitoringService monitoringService,
     required ConnectivityService connectivityService,
   }) : _monitoringService = monitoringService,
-       _connectivityService = connectivityService {
-    _connectivityListener();
-  }
+       _connectivityService = connectivityService;
 
   @override
   BatteryState build() =>
@@ -71,7 +69,8 @@ class BatteryViewModel extends _$BatteryViewModel {
       onError: (Object error, StackTrace stackTrace) {
         if (scaffoldKey.currentContext != null) {
           if (error is DioException &&
-              error.type == DioExceptionType.connectionError) {
+              error.type == DioExceptionType.connectionError &&
+              !state.isConnected) {
             Utils.showNoInternetSnackBar(scaffoldKey.currentContext!);
           } else {
             Utils.showGenericErrorSnackBar(scaffoldKey.currentContext!);
@@ -79,6 +78,7 @@ class BatteryViewModel extends _$BatteryViewModel {
         }
       },
     );
+    _connectivityListener();
   }
 
   /// Reloads the battery monitoring data for the current date

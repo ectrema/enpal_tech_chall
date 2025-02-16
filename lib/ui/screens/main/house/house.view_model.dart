@@ -42,9 +42,7 @@ class HouseViewModel extends _$HouseViewModel {
     required MonitoringService monitoringService,
     required ConnectivityService connectivityService,
   }) : _monitoringService = monitoringService,
-       _connectivityService = connectivityService {
-    _connectivityListener();
-  }
+       _connectivityService = connectivityService;
 
   @override
   HouseState build() => HouseState.initial(_connectivityService.isConnected);
@@ -70,7 +68,8 @@ class HouseViewModel extends _$HouseViewModel {
       onError: (Object error, StackTrace stackTrace) {
         if (scaffoldKey.currentContext != null) {
           if (error is DioException &&
-              error.type == DioExceptionType.connectionError) {
+              error.type == DioExceptionType.connectionError &&
+              !state.isConnected) {
             Utils.showNoInternetSnackBar(scaffoldKey.currentContext!);
           } else {
             Utils.showGenericErrorSnackBar(scaffoldKey.currentContext!);
@@ -78,6 +77,7 @@ class HouseViewModel extends _$HouseViewModel {
         }
       },
     );
+    _connectivityListener();
   }
 
   /// Reloads the house monitoring data for the current date
