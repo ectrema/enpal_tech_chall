@@ -77,3 +77,10 @@ To run this application, create a `.env.json` file in the root directory with th
 }
 ```
 Alternatively, replace `http://10.0.2.2:3000` with your API URL if you are using a different setup.
+
+## Running the Application
+To run the application, run the following command in the terminal:
+```bash
+flutter run --dart-define-from-file=.env.json
+```
+
