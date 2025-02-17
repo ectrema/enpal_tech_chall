@@ -25,7 +25,7 @@ void main() {
         emitsInOrder(<bool>[
           true, // Initial state
           false, // After disconnected
-          true, // After disconnected
+          true, // After connected
         ]),
       );
     });
@@ -78,7 +78,7 @@ void main() {
         connectivityService.isConnectedStream,
         emitsInOrder(<bool>[
           false, // Initial state
-          true, // After disconnected
+          true, // After connected
           false, // After disconnected
         ]),
       );

@@ -5,7 +5,7 @@ import 'package:enpal_tech_chall/data/networking/endpoints/monitoring.endpoint.d
 import 'package:enpal_tech_chall/data/networking/responses/monitoring.model.dart';
 
 /// [MonitoringRemoteDataSourceImpl]
-final class MonitoringRemoteDataSourceImpl
+interface class MonitoringRemoteDataSourceImpl
     implements MonitoringRemoteDataSource {
   final MonitoringEndpoint _monitoringEndpoint;
 

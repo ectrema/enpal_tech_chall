@@ -6,7 +6,7 @@ part of 'battery.view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$batteryViewModelHash() => r'56ecbd49b57f576ebe2acbf605a5b3f1dad9c3c7';
+String _$batteryViewModelHash() => r'17ca4f6998e16d8ebb0f5a392472bfb952cd1ade';
 
 /// ViewModel for the Battery screen that handles the business logic and state management
 /// using Riverpod for dependency injection and state management.

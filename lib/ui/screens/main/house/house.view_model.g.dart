@@ -6,7 +6,7 @@ part of 'house.view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$houseViewModelHash() => r'a90d49e1552ab3c99228b468e92f5ce47ee652cc';
+String _$houseViewModelHash() => r'ad13f0e7a5b9037d00ddd1c0d0b52411150cc74a';
 
 /// ViewModel for the House screen that handles the business logic and state management
 /// using Riverpod for dependency injection and state management.

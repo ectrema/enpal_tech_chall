@@ -5,7 +5,7 @@ import 'package:enpal_tech_chall/domain/entities/monitoring.entity.dart';
 import 'package:enpal_tech_chall/domain/repositories/monitoring.repository.dart';
 
 /// [MonitoringRepositoryImpl]
-final class MonitoringRepositoryImpl implements MonitoringRepository {
+interface class MonitoringRepositoryImpl implements MonitoringRepository {
   final MonitoringRemoteDataSource _remoteDataSource;
 
   MonitoringRepositoryImpl({
